@@ -6,3 +6,4 @@ data/
 runs/
 *.egg-info/
 dist/
+posts.md
