@@ -91,7 +91,20 @@ How to read it:
 - `heuristic` is about 100 lines of hand-written domain logic. It proves every level is solvable through the tool interface alone. Its misses on hard are real ambiguity: a bundle total lands within fee tolerance of a third invoice, and only the narrative ("BULK PAYMENT 0617 0910", "PART PMT 2/2") tells you which is right. An agent that reads the text gets these; one that only does arithmetic doesn't.
 - The interesting question isn't whether a script can solve it. It's whether a small model can learn this from reward alone, and whether that transfers to messier, real books.
 
-I haven't run an LLM through it yet, so there are no model numbers here. That's the next commit.
+### First open model: Qwen2.5-7B-Instruct
+
+20 held-out seeds per level, temperature 0.7, Q4_K_M GGUF on llama.cpp (RTX 4070 laptop, 8 GB). The agent keeps the system prompt, the first observation and the last 12 exchanges.
+
+```
+agent        level    reward   recon  solved invalid/ep  turns
+qwen2.5-7b   easy     -0.104   0.143      0%      31.95   33.5
+qwen2.5-7b   medium   -0.194   0.065      0%      52.25   59.2
+qwen2.5-7b   hard     -0.205   0.047      0%      78.90   85.1
+```
+
+It scores below random on every level, and almost all of that is format, not reasoning. Only 32 of 671 turns on easy were valid tool calls. The usual failure is writing a reasonable call like `search_invoices(customer=None, amount=50554.34, currency="PLN")` with the JSON but without the `<tool>` tags, then repeating that same line until the turn budget runs out. 48 of the 60 episodes got stuck repeating one action five or more times. The sliding window makes it worse: after a few bad turns, the only examples left in context are its own mistakes.
+
+When it does produce valid calls, it sometimes gets them right, including bundles. So the next step is the one from the tic-tac-toe talk: a short SFT pass to teach the format, then RL for the skill. Pass `--rollouts-out` to save every transcript, and read a few before trusting any average.
 
 ## Quickstart
 
@@ -139,7 +152,9 @@ python -m ledger_recon.eval --agent llm --model qwen3:4b \
 
 ## Roadmap
 
-- [ ] Eval a few open models (Qwen3, Gemma 3, LFM2) and a frontier model for a gap chart
+- [x] First open-model eval (Qwen2.5-7B-Instruct, above)
+- [ ] SFT format warm-up on a small model, then eval before and after
+- [ ] Eval more open models (Qwen3, Gemma 3, LFM2) and a frontier model for a gap chart
 - [ ] GRPO training run with TRL or prime-rl on easy, then a curriculum to hard
 - [ ] Port to Prime Intellect's verifiers / Environments Hub and to OpenEnv
 - [ ] Credit notes, write-offs, partial short-pays the agent must leave open
