@@ -21,6 +21,16 @@ from typing import Any
 from .env import SYSTEM_PROMPT
 
 
+def context_window(messages: list[dict[str, str]], history_turns: int) -> list[dict[str, str]]:
+    """System prompt + first observation + the last `history_turns` exchanges.
+
+    Shared by the agent and the SFT data builder, so the model is trained on
+    exactly the context it will see at eval time.
+    """
+    head, tail = messages[:2], messages[2:]
+    return head + (tail[-2 * history_turns:] if history_turns > 0 else [])
+
+
 class LLMAgent:
     def __init__(self, model: str, client: Any = None, base_url: str | None = None, api_key: str | None = None,
                  temperature: float = 0.7, max_tokens: int = 1024, history_turns: int = 12):
@@ -39,8 +49,7 @@ class LLMAgent:
             self.messages = [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": obs}]
         else:
             self.messages.append({"role": "user", "content": obs})
-        head, tail = self.messages[:2], self.messages[2:]
-        window = head + tail[-2 * self.history_turns:]
+        window = context_window(self.messages, self.history_turns)
         resp = self.client.chat.completions.create(
             model=self.model, messages=window, temperature=self.temperature, max_tokens=self.max_tokens,
         )

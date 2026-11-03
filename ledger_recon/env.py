@@ -120,7 +120,9 @@ class LedgerReconEnv:
             except ToolError as e:
                 st.invalid_actions += 1
                 obs = f"ERROR: {e}"
-            except TypeError as e:  # wrong/missing arguments
+            except (TypeError, ValueError, AttributeError, KeyError) as e:
+                # wrong, missing or badly typed arguments, e.g. amount="" or page="two".
+                # Model output must never crash the env; it is just an invalid turn.
                 st.invalid_actions += 1
                 obs = f"ERROR: bad arguments for {parsed.name}: {e}"
 

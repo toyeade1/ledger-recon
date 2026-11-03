@@ -151,3 +151,23 @@ def test_all_agents_terminate():
         for d in ("easy", "hard"):
             r = run_episode(LedgerReconEnv(d), cls(0), 0, name)
             assert r.breakdown
+
+
+def test_garbage_arguments_never_crash_the_env():
+    """Found by a real 1.5B model sending amount="". Every tool, junk values."""
+    import itertools
+    junk = ["", "two", None, -1, 3.5, [], {}, ["x"], {"a": 1}, "TXN-00000", True]
+    env = LedgerReconEnv("hard")
+    obs, info = env.reset(seed=3)
+    tools = ["list_transactions", "list_invoices", "search_invoices", "get_fx_rate",
+             "match", "unmatch", "flag"]
+    keys = ["status", "page", "customer", "amount", "currency", "from_currency", "to_currency",
+            "transaction_id", "invoice_ids", "reason"]
+    for tool, key, val in itertools.product(tools, keys, junk):
+        if env.state.done:
+            env.reset(seed=3)
+        obs, *_ = env.step({"name": tool, "args": {key: val}})
+        assert isinstance(obs, str)
+    env.reset(seed=3)
+    obs, *_ = env.step({"name": "search_invoices", "args": {"amount": "", "currency": "PLN"}})
+    assert obs.startswith("ERROR")

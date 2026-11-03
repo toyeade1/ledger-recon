@@ -30,14 +30,23 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--model", help="model name for --agent llm")
     p.add_argument("--base-url", help="OpenAI-compatible endpoint for --agent llm")
     p.add_argument("--temperature", type=float, default=0.7)
+    p.add_argument("--backend", default="openai", choices=["openai", "hf"],
+                   help="openai: any OpenAI-compatible server; hf: load the model locally with transformers")
+    p.add_argument("--adapter", help="LoRA adapter dir for --backend hf")
+    p.add_argument("--history-turns", type=int, default=12, help="exchanges kept in the LLM's context")
+    p.add_argument("--max-tokens", type=int, default=1024)
     p.add_argument("--rollouts-out", type=Path, help="write every trajectory as JSONL")
     a = p.parse_args(argv)
 
     names = list(AGENTS) if a.agent == "all" else [a.agent]
     levels = ["easy", "medium", "hard"] if a.difficulty == "all" else [a.difficulty]
-    out = a.rollouts_out.open("w") if a.rollouts_out else None
-    if out:
+    if a.rollouts_out:
         a.rollouts_out.parent.mkdir(parents=True, exist_ok=True)
+    out = a.rollouts_out.open("w") if a.rollouts_out else None
+    client = None
+    if a.agent == "llm" and a.backend == "hf":
+        from .hf_client import HFChatClient
+        client = HFChatClient(a.model, adapter=a.adapter)  # load once, reuse across episodes
 
     print(f"{'agent':<12} {'level':<7} {'reward':>7} {'recon':>7} {'solved':>7} {'invalid/ep':>10} {'turns':>6}")
     for name in names:
@@ -47,7 +56,8 @@ def main(argv: list[str] | None = None) -> None:
                 seed = EVAL_SEED_OFFSET + i
                 if name == "llm":
                     from .llm import LLMAgent
-                    agent = LLMAgent(a.model, base_url=a.base_url, temperature=a.temperature)
+                    agent = LLMAgent(a.model, client=client, base_url=a.base_url, temperature=a.temperature,
+                                     max_tokens=a.max_tokens, history_turns=a.history_turns)
                 else:
                     agent = AGENTS[name](seed)
                 env = LedgerReconEnv(level)
