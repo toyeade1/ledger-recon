@@ -106,12 +106,45 @@ It scores below random on every level, and almost all of that is format, not rea
 
 When it does produce valid calls, it sometimes gets them right, including bundles. So the next step is the one from the tic-tac-toe talk: a short SFT pass to teach the format, then RL for the skill. Pass `--rollouts-out` to save every transcript, and read a few before trusting any average.
 
+### SFT format warm-up: Qwen2.5-1.5B-Instruct, before and after
+
+LoRA (rank 16, all linear layers) on 1,500 turns from solved heuristic episodes on train seeds, one epoch, about an hour on the same 8 GB laptop GPU (5.4 GB peak). Each training example is cut with the exact context window the agent sees at eval time. Both evals use transformers in bf16, temperature 0.7, a 40-turn window and the same 10 held-out seeds per level. The wider window is deliberate: the scripted solver reads the invoice list once and matches against it 20+ turns later, so with 12 turns the training targets would reference invoices the model can no longer see.
+
+```
+model             level    reward   recon  solved invalid/ep  turns
+1.5b base         easy     -0.265   0.014      0%      34.40   35.5
+1.5b + SFT        easy      0.911   0.843     50%       2.50   14.5
+1.5b base         medium   -0.297   0.000      0%      61.80   62.0
+1.5b + SFT        medium    0.709   0.715     10%      11.10   34.0
+1.5b base         hard     -0.299   0.000      0%      91.70   92.1
+1.5b + SFT        hard      0.346   0.518      0%      47.00   78.5
+```
+
+The base model almost never produces a valid call and runs out of turns in 28 of 30 episodes. After SFT it follows the format and the basic routine: list, check FX, match or flag, submit. Per case type on hard, it does well on FX payments (0.80) and plain matches (0.68), so-so on bundles (0.57), and badly on split payments (0.25) and transposed references (0.10). In other words, it learned the procedure and still falls for the traps that are there to break shortcuts.
+
+Long episodes are where it falls apart. On hard, 270 of its errors are trying to match a transaction it already matched, and 94 use transaction ids that don't exist. Half the hard episodes hit the turn budget.
+
+That's about what SFT should do: fix format and give RL a policy that gets non-zero reward. Separating "looks right" from "is right" on transposed refs and splits is the job for GRPO. Ten seeds per level is a small sample, so read the gaps as rough. These numbers aren't comparable to the 7B table above (different window and runtime).
+
+Reproduce:
+
+```bash
+pip install torch transformers peft
+python examples/make_sft_data.py --format turns --difficulty all --episodes 150 \
+  --max-turns-per-episode 12 --history-turns 40 --out data/sft_turns.jsonl
+python examples/sft_lora.py --data data/sft_turns.jsonl --out runs/sft-1.5b --max-rows 1500
+python -m ledger_recon.eval --agent llm --backend hf --model Qwen/Qwen2.5-1.5B-Instruct \
+  --adapter runs/sft-1.5b --history-turns 40 --max-tokens 256 --episodes 10
+```
+
+On an 8 GB card the transformers backend is slow for the base model, because its long rambling turns push memory past the card and Windows spills into shared RAM. For bigger evals, merge the adapter (`examples/merge_lora.py`), convert to GGUF and serve both models through llama.cpp.
+
 ## Quickstart
 
 ```bash
 git clone https://github.com/toyeade1/ledger-recon && cd ledger-recon
 pip install -e ".[dev,llm]"
-pytest                                   # 24 tests: determinism, reward-hacking probes, solvability
+pytest                                   # 25 tests: determinism, reward-hacking probes, solvability
 python -m ledger_recon.eval              # baseline table above
 ```
 
@@ -140,6 +173,8 @@ python -m ledger_recon.eval --agent llm --model qwen3:4b \
 ## Examples
 
 - `examples/make_sft_data.py`: turns solved heuristic episodes into chat-format SFT data for a short format warm-up before RL.
+- `examples/sft_lora.py`: LoRA SFT in plain PyTorch, sized for an 8 GB GPU. Loss on the action tokens only.
+- `examples/merge_lora.py`: merge an adapter into the base model for serving.
 - `examples/grpo_advantages.py`: GRPO's group-relative advantage on real rollouts, no GPU. It shows why every rollout in a group needs the same seed, and why a group where everyone succeeds teaches nothing.
 
 ## Design notes
@@ -153,9 +188,9 @@ python -m ledger_recon.eval --agent llm --model qwen3:4b \
 ## Roadmap
 
 - [x] First open-model eval (Qwen2.5-7B-Instruct, above)
-- [ ] SFT format warm-up on a small model, then eval before and after
+- [x] SFT format warm-up on a small model, then eval before and after (above)
 - [ ] Eval more open models (Qwen3, Gemma 3, LFM2) and a frontier model for a gap chart
-- [ ] GRPO training run with TRL or prime-rl on easy, then a curriculum to hard
+- [ ] GRPO from the SFT checkpoint on easy, then a curriculum to hard
 - [ ] Port to Prime Intellect's verifiers / Environments Hub and to OpenEnv
 - [ ] Credit notes, write-offs, partial short-pays the agent must leave open
 - [ ] A variant generated from anonymised real bank and ERP exports
