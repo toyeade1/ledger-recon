@@ -1,0 +1,812 @@
+{
+  "dataset": "Nine hand-authored templates; six unseen amount seeds. Synthetic functional coverage, not generalization or production accuracy.",
+  "seeds": [
+    21001,
+    21002,
+    21003,
+    21004,
+    21005,
+    21006
+  ],
+  "results": [
+    {
+      "seed": 21001,
+      "case": "PAY-EXACT",
+      "kind": "exact",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [
+        "INV-EXACT"
+      ],
+      "baseline_correct_proposal": true,
+      "seconds": 0.0301,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21001,
+      "case": "PAY-CREDIT",
+      "kind": "credit",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.1177,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21001,
+      "case": "PAY-PARTIAL",
+      "kind": "partial",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0171,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21001,
+      "case": "PAY-BUNDLE",
+      "kind": "bundle",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0184,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21001,
+      "case": "PAY-AMBIGUOUS",
+      "kind": "ambiguous",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.1011,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21001,
+      "case": "PAY-MISSING",
+      "kind": "missing",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.119,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21001,
+      "case": "PAY-CONFLICT",
+      "kind": "conflict",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.1523,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21001,
+      "case": "PAY-OVERPAY",
+      "kind": "overpayment",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0422,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21001,
+      "case": "PAY-SEEDED",
+      "kind": "original_generator_exact",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [
+        "INV-SEEDED"
+      ],
+      "baseline_correct_proposal": true,
+      "seconds": 0.0872,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21002,
+      "case": "PAY-EXACT",
+      "kind": "exact",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [
+        "INV-EXACT"
+      ],
+      "baseline_correct_proposal": true,
+      "seconds": 0.0385,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21002,
+      "case": "PAY-CREDIT",
+      "kind": "credit",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0289,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21002,
+      "case": "PAY-PARTIAL",
+      "kind": "partial",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0365,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21002,
+      "case": "PAY-BUNDLE",
+      "kind": "bundle",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0388,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21002,
+      "case": "PAY-AMBIGUOUS",
+      "kind": "ambiguous",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0247,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21002,
+      "case": "PAY-MISSING",
+      "kind": "missing",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0559,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21002,
+      "case": "PAY-CONFLICT",
+      "kind": "conflict",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0313,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21002,
+      "case": "PAY-OVERPAY",
+      "kind": "overpayment",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0318,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21002,
+      "case": "PAY-SEEDED",
+      "kind": "original_generator_exact",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [
+        "INV-SEEDED"
+      ],
+      "baseline_correct_proposal": true,
+      "seconds": 0.0214,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21003,
+      "case": "PAY-EXACT",
+      "kind": "exact",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [
+        "INV-EXACT"
+      ],
+      "baseline_correct_proposal": true,
+      "seconds": 0.0158,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21003,
+      "case": "PAY-CREDIT",
+      "kind": "credit",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0128,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21003,
+      "case": "PAY-PARTIAL",
+      "kind": "partial",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0194,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21003,
+      "case": "PAY-BUNDLE",
+      "kind": "bundle",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0334,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21003,
+      "case": "PAY-AMBIGUOUS",
+      "kind": "ambiguous",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0174,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21003,
+      "case": "PAY-MISSING",
+      "kind": "missing",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0128,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21003,
+      "case": "PAY-CONFLICT",
+      "kind": "conflict",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0476,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21003,
+      "case": "PAY-OVERPAY",
+      "kind": "overpayment",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0699,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21003,
+      "case": "PAY-SEEDED",
+      "kind": "original_generator_exact",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [
+        "INV-SEEDED"
+      ],
+      "baseline_correct_proposal": true,
+      "seconds": 0.2159,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21004,
+      "case": "PAY-EXACT",
+      "kind": "exact",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [
+        "INV-EXACT"
+      ],
+      "baseline_correct_proposal": true,
+      "seconds": 0.1194,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21004,
+      "case": "PAY-CREDIT",
+      "kind": "credit",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0339,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21004,
+      "case": "PAY-PARTIAL",
+      "kind": "partial",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.03,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21004,
+      "case": "PAY-BUNDLE",
+      "kind": "bundle",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0379,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21004,
+      "case": "PAY-AMBIGUOUS",
+      "kind": "ambiguous",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0913,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21004,
+      "case": "PAY-MISSING",
+      "kind": "missing",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0501,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21004,
+      "case": "PAY-CONFLICT",
+      "kind": "conflict",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0883,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21004,
+      "case": "PAY-OVERPAY",
+      "kind": "overpayment",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0229,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21004,
+      "case": "PAY-SEEDED",
+      "kind": "original_generator_exact",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [
+        "INV-SEEDED"
+      ],
+      "baseline_correct_proposal": true,
+      "seconds": 0.0182,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21005,
+      "case": "PAY-EXACT",
+      "kind": "exact",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [
+        "INV-EXACT"
+      ],
+      "baseline_correct_proposal": true,
+      "seconds": 0.0205,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21005,
+      "case": "PAY-CREDIT",
+      "kind": "credit",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0162,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21005,
+      "case": "PAY-PARTIAL",
+      "kind": "partial",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0213,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21005,
+      "case": "PAY-BUNDLE",
+      "kind": "bundle",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0228,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21005,
+      "case": "PAY-AMBIGUOUS",
+      "kind": "ambiguous",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0218,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21005,
+      "case": "PAY-MISSING",
+      "kind": "missing",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0169,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21005,
+      "case": "PAY-CONFLICT",
+      "kind": "conflict",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0176,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21005,
+      "case": "PAY-OVERPAY",
+      "kind": "overpayment",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0181,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21005,
+      "case": "PAY-SEEDED",
+      "kind": "original_generator_exact",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [
+        "INV-SEEDED"
+      ],
+      "baseline_correct_proposal": true,
+      "seconds": 0.055,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21006,
+      "case": "PAY-EXACT",
+      "kind": "exact",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [
+        "INV-EXACT"
+      ],
+      "baseline_correct_proposal": true,
+      "seconds": 0.068,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21006,
+      "case": "PAY-CREDIT",
+      "kind": "credit",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0336,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21006,
+      "case": "PAY-PARTIAL",
+      "kind": "partial",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0275,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21006,
+      "case": "PAY-BUNDLE",
+      "kind": "bundle",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0434,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21006,
+      "case": "PAY-AMBIGUOUS",
+      "kind": "ambiguous",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0184,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21006,
+      "case": "PAY-MISSING",
+      "kind": "missing",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0256,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21006,
+      "case": "PAY-CONFLICT",
+      "kind": "conflict",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0278,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21006,
+      "case": "PAY-OVERPAY",
+      "kind": "overpayment",
+      "expected_status": "blocked",
+      "status": "blocked",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [],
+      "baseline_correct_proposal": false,
+      "seconds": 0.0465,
+      "retrieval_mode": "qdrant-lexical-only"
+    },
+    {
+      "seed": 21006,
+      "case": "PAY-SEEDED",
+      "kind": "original_generator_exact",
+      "expected_status": "review",
+      "status": "review",
+      "correct": true,
+      "false_proposal": false,
+      "baseline_proposal": [
+        "INV-SEEDED"
+      ],
+      "baseline_correct_proposal": true,
+      "seconds": 0.0639,
+      "retrieval_mode": "qdrant-lexical-only"
+    }
+  ],
+  "summary": {
+    "cases": 54,
+    "correct_case_outcomes": 54,
+    "false_proposals": 0,
+    "reviewable_cases": 30,
+    "investigator_correct_proposals": 30,
+    "baseline_correct_proposals": 12,
+    "median_seconds": 0.0316,
+    "extraction_mode": "rules",
+    "embeddings": false
+  },
+  "ollama_smoke": {
+    "cases": 1,
+    "status": "review",
+    "seconds": 33.451,
+    "model": "qwen2.5:7b",
+    "provider": "local-ollama",
+    "retrieval_mode": "qdrant-hybrid-rrf",
+    "retrieval_note": "Qdrant sparse lexical + local nomic-embed-text dense reciprocal-rank fusion; dense text bounded to first 6000 characters",
+    "allocations": [
+      {
+        "invoice_id": "INV-CREDIT",
+        "amount_cents": 975000
+      }
+    ],
+    "credits": [
+      {
+        "credit_id": "CN-2026-04",
+        "document_id": "credit-note",
+        "invoice_id": "INV-CREDIT",
+        "amount_cents": 25000
+      }
+    ],
+    "blockers": [],
+    "citation_count": 4,
+    "model_raw_output": {
+      "allocations": [
+        {
+          "invoice_id": "INV-CREDIT",
+          "amount_cents": 975000
+        }
+      ],
+      "credits": [
+        {
+          "credit_id": "CN-2026-04",
+          "document_id": "credit-note",
+          "invoice_id": "INV-CREDIT",
+          "amount_cents": 25000
+        }
+      ],
+      "citations": [
+        {
+          "document_id": "transaction:PAY-CREDIT",
+          "quote": "{\"amount_cents\":975000,\"currency\":\"USD\",\"customer\":\"Northstar Trading\",\"id\":\"PAY-CREDIT\",\"reference\":\"November settlement\"}"
+        },
+        {
+          "document_id": "invoice:INV-CREDIT",
+          "quote": "{\"amount_cents\":1000000,\"currency\":\"USD\",\"customer\":\"Northstar Trading\",\"id\":\"INV-CREDIT\"}"
+        },
+        {
+          "document_id": "credit-remittance",
+          "quote": "REMITTANCE transaction_id=PAY-CREDIT; customer=Northstar Trading; currency=USD; allocations=INV-CREDIT:975000"
+        },
+        {
+          "document_id": "credit-note",
+          "quote": "Credit note: CN-2026-04\nCustomer: Northstar Trading\nCurrency: USD\nInvoice: INV-CREDIT\nCredit amount (cents): 25000"
+        }
+      ],
+      "explanation": "The payment of 975000 cents is allocated to the invoice INV-CREDIT, and a credit note CN-2026-04 of 25000 cents is applied, reducing the invoice balance to 0. The payment and credit together equal the remaining balance of the invoice, and all evidence is cited exactly as provided.",
+      "blockers": []
+    },
+    "limitation": "One post-prompt-development integration case, not held-out LLM accuracy. Earlier development attempts were blocked for amount/credit errors."
+  }
+}

@@ -15,6 +15,12 @@ dependencies = []
 [project.optional-dependencies]
 llm = ["openai>=1.40"]
 dev = ["pytest>=8"]
+investigator = ["langgraph>=1.2,<2", "langgraph-checkpoint-sqlite>=3,<4", "qdrant-client>=1.20,<2", "httpx>=0.28,<1", "fastapi>=0.115,<1", "uvicorn>=0.30,<1", "pypdf>=6,<8", "python-multipart>=0.0.20,<1", "mcp>=2,<3"]
+
+[project.scripts]
+payment-investigator = "ledger_recon.investigator.server:main"
+payment-investigator-demo = "ledger_recon.investigator.demo:main"
+payment-investigator-mcp = "ledger_recon.investigator.mcp_server:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["ledger_recon"]

@@ -1,5 +1,7 @@
 # ledger-recon
 
+**Payment investigator:** a local document-evidence review console with LangGraph, Qdrant, Ollama and atomic sandbox approvals. [Run it and read its limits](docs/payment-investigator.md). The original RL environment below is unchanged.
+
 A multi-step RL environment where an LLM agent reconciles a multi-currency bank account against an invoice ledger, for a company that sells across Europe, the Middle East and Africa.
 
 Most open RLVR data is math and code: one prompt, one answer, a checker. The model's answer doesn't change anything, and the next problem is just the next row. Real back-office work doesn't look like that. You look something up, act, and your earlier choices change what's left to do. This repo is a small, honest version of that kind of task.
